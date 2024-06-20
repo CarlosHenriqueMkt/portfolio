@@ -1,63 +1,81 @@
 import * as THREE from 'three';
+import { models } from './models';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 
 const sizes = {
-  width: window.innerWidth,
-  height: window.innerHeight,
-}
+  width: Math.min(window.innerWidth, 1000),
+  height: Math.min(window.innerHeight, window.innerHeight < 768 ? 400 : 600),
+};
 
-const aspectRatio = sizes.width / sizes.height
+const aspectRatio = sizes.width / sizes.height;
 
-let renderer, scene, camera, mesh, geometry, material, canvas;
-const clock = new THREE.Clock()
+let renderer, scene, camera, fov, clock, velociraptor, canvas, environment, pmremGenerator, mixer, speed;
+clock = new THREE.Clock();
 
 experience();
+environmentForModels();
 animate();
 
-function experience() {
+export function experience() {
   scene = new THREE.Scene();
-  camera = new THREE.PerspectiveCamera(65, aspectRatio, 1, 1000);
-  camera.position.z = 5
-  scene.add(camera);
-
-  geometry = new THREE.BoxGeometry(1, 1, 1);
-  material = new THREE.MeshNormalMaterial();
-  mesh = new THREE.Mesh(geometry, material);
-  scene.add(mesh);
-
-  window.addEventListener('resize', () => {
-    sizes.width = window.innerWidth;
-    sizes.height = window.innerHeight;
-
-    camera.aspect = sizes.width / sizes.height;
-    camera.updateProjectionMatrix();
-
-    renderer.setSize(sizes.width, sizes.height);
-  });
-
   canvas = document.getElementById('app');
-  renderer = new THREE.WebGLRenderer(
-    { 
-      antialias: true, 
-      alpha: true 
-    }
-  );
-  renderer.shadowMap = true
-  renderer.setSize(sizes.width, sizes.height);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+  renderer = new THREE.WebGLRenderer({
+    antialias: true,
+    alpha: true
+  });
   canvas.appendChild(renderer.domElement);
+  renderer.shadowMap.enabled = true;
+  renderer.setSize(sizes.width, sizes.height);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1));
+
+  camSettings();
+
+  // Load models and create the mixer
+  models(scene, (loadedModel, loadedMixer) => {
+    velociraptor = loadedModel;
+    mixer = loadedMixer;
+  });
+  
+
+  window.addEventListener('resize', updateRendererSizes);
+
   renderer.render(scene, camera);
 }
 
+function environmentForModels() {
+  environment = new RoomEnvironment(renderer);
+  pmremGenerator = new THREE.PMREMGenerator(renderer);
+  scene.environment = pmremGenerator.fromScene(environment).texture;
+}
+
+function camSettings() {
+  fov = window.innerWidth < 600 ? 10 : 15;
+  camera = new THREE.PerspectiveCamera(fov, aspectRatio, 0.1, 1000);
+  camera.position.z = 10;
+  scene.add(camera);
+}
+
+function updateRendererSizes() {
+  sizes.width = window.innerWidth
+  sizes.height = Math.min(window.innerHeight, window.innerHeight < 768 ? 400 : 1000),
+
+  camera.aspect = sizes.width / sizes.height;
+  camera.updateProjectionMatrix();
+
+  renderer.setSize(sizes.width, sizes.height);
+}
+
 function animate() {
-
-  const elapsedTime = clock.getElapsedTime()
-
-  const meshMoviment = elapsedTime * 0.5
-
-  mesh.rotation.x = Math.sin(meshMoviment) * 1
-  mesh.rotation.y = Math.sin(meshMoviment) * 1
-  mesh.rotation.z = Math.sin(meshMoviment) * 1
-
   requestAnimationFrame(animate);
+  
+  const delta = clock.getDelta();
+
+  /* speed = 1; */ //Controla a multiplicação de delta
+
+  if (mixer) {
+    mixer.update(delta);
+  }
+
   renderer.render(scene, camera);
 }
