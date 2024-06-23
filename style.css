@@ -71,6 +71,7 @@ header {
   align-items: center;
   padding: calc(var(--space) / 2) var(--space);
   z-index: 11;
+  opacity: 0;
   @media (orientation: portrait) {
     padding: calc(var(--space) / 2) var(--space);
     background-color: var(--button-background-color);

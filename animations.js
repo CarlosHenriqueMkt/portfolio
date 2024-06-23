@@ -94,7 +94,13 @@ export function gsapAnimations(velociraptor) {
     );
   });
 
-  /* Conteúdos */
+  /* Header */
+  const header = document.getElementById('header')
+  gsap.fromTo(
+    header, 
+    {y: -10, opacity: 0}, 
+    {y: 0, opacity: 1, duration: .5}
+  )
 
   
 }
