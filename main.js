@@ -2,23 +2,26 @@ import * as THREE from 'three';
 import { models } from './models';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 
+let renderer, scene, camera, fov, clock, velociraptor, canvas, environment, pmremGenerator, mixer, speed;
+
+canvas = document.getElementById('app');
+
 const sizes = {
-  width: window.innerWidth,
-  height: window.innerHeight,
+  width: canvas.clientWidth,
+  height: canvas.clientHeight,
 };
 
 const aspectRatio = sizes.width / sizes.height;
 
-let renderer, scene, camera, fov, clock, velociraptor, canvas, environment, pmremGenerator, mixer, speed;
-clock = new THREE.Clock();
 
+clock = new THREE.Clock();
 experience();
 environmentForModels();
 animate();
 
 export function experience() {
   scene = new THREE.Scene();
-  canvas = document.getElementById('app');
+  
 
   renderer = new THREE.WebGLRenderer({
     antialias: true,
@@ -36,6 +39,7 @@ export function experience() {
     velociraptor = loadedModel;
     mixer = loadedMixer;
   });
+  models.needsUpdate = true
   
 
   window.addEventListener('resize', updateRendererSizes);
@@ -50,15 +54,16 @@ function environmentForModels() {
 }
 
 function camSettings() {
-  fov = window.innerWidth < 600 ? 10 : 15;
+  fov = window.innerWidth < 600 ? 10 : 17;
   camera = new THREE.PerspectiveCamera(fov, aspectRatio, 0.1, 1000);
   camera.position.z = 10;
   scene.add(camera);
 }
 
 function updateRendererSizes() {
-  sizes.width = window.innerWidth
-  sizes.height = window.innerHeight
+  canvas = document.getElementById('app');
+  sizes.width = canvas.clientWidth;
+  sizes.height = canvas.clientHeight;
 
   camera.aspect = sizes.width / sizes.height;
   camera.updateProjectionMatrix();

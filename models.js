@@ -9,6 +9,7 @@ export function models(scene, callback) {
     const velociraptor = gltf.scene;
     const animations = gltf.animations;
     velociraptor.rotation.y = -1.5;
+
     if(window.innerWidth <= 768) {
       velociraptor.scale.setScalar(.2)
     } else {
