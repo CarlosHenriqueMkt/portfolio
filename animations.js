@@ -13,11 +13,11 @@ export function gsapAnimations(velociraptor) {
     gsap.fromTo(
       velociraptor.position, {
         x: 1.5,
-        y: -.5,
+        y: -.8,
       },
       {
         x: -.05,
-        y: -.5,
+        y: -.8,
         duration: 2.58333325386,
       }
     )
