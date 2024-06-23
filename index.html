@@ -9,9 +9,11 @@
   </head>
   <body>
     <div class="wrapper">
+      <div id="app" class="canvas"></div>
       <header>
         <a href="/">
-          <img src="/logo.png" alt="logo tipo Fala com o Carlos">
+          <img id="img" class="logoBlack" src="/logo.png" alt="logo tipo Fala com o Carlos">
+          <img id="img" class="logoWhite" src="/logo-white.png" alt="logo tipo Fala com o Carlos">
         </a>
         <nav>
           <a href="">Início</a>
@@ -26,7 +28,6 @@
           <p>Hic perspiciatis nihil modi explicabo possimus praesentium, laborum quos, consectetur incidunt vel eaque tenetur voluptatum minus cum, alias cumque delectus quis voluptates.</p>
           <a href="">Entrar em contato</a>
         </div>
-        <div id="app" class="canvas"></div>
       </main>
       <section id="numbers">
         <div class="number">
@@ -45,6 +46,9 @@
         </div>
       </section>
       <section class="portfolio">
+      <h2 id='portTitle'>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est in nemo expedita blanditiis, nihil pariatur at nam minus aliquam optio magni veniam eius explicabo dignissimos odio ullam nobis earum nesciunt?
+      </h2>
         <div class="card left">
           <a href="">
             <img src="/projects/haunted.jpg" alt=''/>
@@ -72,7 +76,7 @@
             <a href="/">Acesse o site</a>
           </div>
         </div>
-        <div class="card right">
+        <!-- <div class="card right">
           <a href="">
             <img src="/projects/lbee.jpg" alt=''/>
           </a>
@@ -80,8 +84,8 @@
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus voluptates iusto natus distinctio praesentium tenetur deserunt. Commodi atque aliquam animi ex iure autem, minima dicta quae nulla voluptatum, non accusamus.</p>
             <a href="/">Acesse o site</a>
           </div>
-        </div>
-        <div class="card left">
+        </div> -->
+        <div class="card right">
           <a href="">
             <img src="/projects/institucional.jpg" alt=''/>
           </a>
@@ -90,25 +94,34 @@
             <a href="/">Acesse o site</a>
           </div>
         </div>
-        <div class="card right">
+        <div class="card left">
           <a href="">
-            <img src="/projects/credcesta.jpg" alt=''/>
+            <img src="/projects/credcesta.png" alt=''/>
           </a>
           <div class="cardContent">
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus voluptates iusto natus distinctio praesentium tenetur deserunt. Commodi atque aliquam animi ex iure autem, minima dicta quae nulla voluptatum, non accusamus.</p>
             <a href="/"> Acesse o site </a>
           </div>
         </div>
-        
       </section>
-      <section>
-        Conteúdos
-      </section>
+      <!-- <section id="slider">
+        <div class="box-container">
+          <div class="box"><img src="/projects/fgts.jpg" alt="" /></div>
+          <div class="box"><img src="/projects/institucional.jpg" alt="" /></div>
+          <div class="box">SLIDE-03</div>
+          <div class="box">SLIDE-04</div>
+        </div>
+        <div class="controls">
+            <button id="prevButton">Prev</button>
+            <button id="nextButton">Next</button>
+        </div>
+      </section> -->
       <footer>
         Footer
       </footer>
       <script type="module" src="/main.js"></script>
       <script type="module" src="/counter.js"></script>
+      <script type="module" src="/slider.js"></script>
     </div>
   </body>
   </html>

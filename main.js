@@ -3,8 +3,8 @@ import { models } from './models';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 
 const sizes = {
-  width: Math.min(window.innerWidth, 1000),
-  height: Math.min(window.innerHeight, window.innerHeight < 768 ? 400 : 600),
+  width: window.innerWidth,
+  height: window.innerHeight,
 };
 
 const aspectRatio = sizes.width / sizes.height;
@@ -58,7 +58,7 @@ function camSettings() {
 
 function updateRendererSizes() {
   sizes.width = window.innerWidth
-  sizes.height = Math.min(window.innerHeight, window.innerHeight < 768 ? 400 : 1000),
+  sizes.height = window.innerHeight
 
   camera.aspect = sizes.width / sizes.height;
   camera.updateProjectionMatrix();
@@ -67,8 +67,6 @@ function updateRendererSizes() {
 }
 
 function animate() {
-  requestAnimationFrame(animate);
-  
   const delta = clock.getDelta();
 
   /* speed = 1; */ //Controla a multiplicação de delta
@@ -78,4 +76,5 @@ function animate() {
   }
 
   renderer.render(scene, camera);
+  requestAnimationFrame(animate);
 }
