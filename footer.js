@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   const contentDiv = document.getElementById('content');
   const paragraph = document.createElement('p');
-  paragraph.textContent = `© ${currentYear} Credcesta — Todos os direitos reservados`;
+  paragraph.textContent = `© ${currentYear} 3D NA WEB — Todos os direitos reservados`;
   paragraph.className = 'copyright';
 
   contentDiv.appendChild(paragraph);
