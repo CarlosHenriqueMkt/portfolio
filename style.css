@@ -25,6 +25,7 @@ html, body {
   background-color: var(--background-color);
   font-size: 1vw;
   overflow-x: hidden !important;
+  scroll-behavior: smooth;
 }
 
 h1, h2, h3 {
@@ -195,6 +196,12 @@ header nav a:hover {
   &:hover {
     scale: 1.03;
   }
+}
+
+.hero small {
+  font-size: .75rem; 
+  color: var(--content-color);
+  font-weight: 300;
 }
 
 #numbers {
@@ -403,4 +410,25 @@ footer .footerLogo {
   @media (orientation: portrait) {
     display: none;
   }
+}
+
+.scrollToTopBtn {
+  display: none; /* Hidden by default */
+  position: fixed;
+  bottom: 26px;
+  right: 20px;
+  z-index: 99;
+  border: none;
+  outline: none;
+  background-color: var(--button-background-color);
+  color: var(--button-text-color);
+  cursor: pointer;
+  padding: 15px;
+  border-radius: 10px;
+  font-size: 18px;
+  transition: opacity 0.3s;
+}
+
+.scrollToTopBtn:hover {
+  background-color: var(--content-color); /* Darker background on hover */
 }
